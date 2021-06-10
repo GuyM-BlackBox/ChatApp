@@ -6,6 +6,7 @@ const url = 'mongodb://localhost:27017/chatApp';
 const connect = mongoose.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true });
 
 const users = {};
+const userChatId = {};
 
 connect.then((db) => {
     console.log('Connected correctly to MongoDB');
@@ -51,14 +52,15 @@ connect.then((db) => {
         })
         socket.on('new-user', data => {
             users[socket.id] = data.user;
-            socket.broadcast.emit('user-connected', users[socket.id]);
+            userChatId[socket.id] = data.chatId;
+            socket.broadcast.emit('user-connected', {name: users[socket.id], chatId: userChatId[socket.id]});
         })
         socket.on('disconnect', name => {
-            socket.broadcast.emit('user-disconnected', users[socket.id]);
+            socket.broadcast.emit('user-disconnected', {name: users[socket.id], chatId: userChatId[socket.id]});
             delete users[socket.id];
         })
         socket.on('send-chat-message', message => {
-            socket.broadcast.emit('chat-message', { message: message, name: users[socket.id]});  
+            socket.broadcast.emit('chat-message', { message: message, name: users[socket.id], chatId: userChatId[socket.id]});  
         })
     })
 });
