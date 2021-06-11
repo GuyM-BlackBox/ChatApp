@@ -9,6 +9,8 @@ const connect = mongoose.connect(url,{ useNewUrlParser: true, useUnifiedTopology
 const users = {};
 const userChatId = {};
 
+console.log('Connecting to port: ', PORT);
+
 connect.then((db) => {
     console.log('Connected correctly to MongoDB');
 
