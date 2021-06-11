@@ -2,7 +2,7 @@ const io = require('socket.io')(3000, {cors: { origin: "*", },});
 const Chats = require('./models/chats.js');
 const mongoose = require('mongoose');
 
-const url = 'mongodb-bbc6:27017/chatApp';
+const url = 'mongodb+srv://admin:admin@cluster0.ef9b4.mongodb.net/chatApp';
 const connect = mongoose.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true });
 
 const users = {};
