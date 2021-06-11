@@ -1,4 +1,5 @@
-const io = require('socket.io')(3000, {cors: { origin: "*", },});
+const PORT = process.env.PORT || 3000;
+const io = require('socket.io')(PORT, {cors: { origin: "*", },});
 const Chats = require('./models/chats.js');
 const mongoose = require('mongoose');
 
