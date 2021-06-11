@@ -13,7 +13,7 @@ console.log('Connecting to port: ', PORT);
 
 connect.then((db) => {
     console.log('Connected correctly to MongoDB');
-
+    Chats.create({ password: 'I am in!', messages: []});//Only for testing purposes
     io.on('connection', socket => {
         socket.on('disconnect', name => {
             socket.broadcast.emit('user-disconnected', users[socket.id]);
